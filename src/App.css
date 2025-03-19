@@ -41,197 +41,6 @@ body {
   position: relative;
 }
 
-/* Terminal Decorations */
-.terminal-decoration {
-  width: 200px;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #0d0d0d;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(255, 69, 0, 0.2);
-  overflow: hidden;
-  opacity: 0.8;
-  z-index: 1;
-  display: none; /* Hidden by default on smaller screens */
-}
-
-.terminal-decoration.left {
-  left: 20px;
-}
-
-.terminal-decoration.right {
-  right: 20px;
-}
-
-@media (min-width: 1500px) {
-  .terminal-decoration {
-    display: block; /* Show on larger screens */
-  }
-}
-
-.terminal-header {
-  background-color: #1a1a1a;
-  padding: 8px;
-  display: flex;
-  gap: 6px;
-}
-
-.terminal-button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.terminal-button.red {
-  background-color: #ff5f56;
-}
-
-.terminal-button.yellow {
-  background-color: #ffbd2e;
-}
-
-.terminal-button.green {
-  background-color: #27c93f;
-}
-
-.terminal-body {
-  height: 400px;
-  padding: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.terminal-line {
-  margin-bottom: 6px;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.terminal-prompt {
-  color: var(--orange);
-  margin-right: 8px;
-}
-
-.terminal-command {
-  color: #8f8f8f;
-  overflow: hidden;
-}
-
-.terminal-command::after {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 15px;
-  background-color: #bbb;
-  animation: blink 1s infinite;
-  vertical-align: middle;
-}
-
-/* Matrix animation in the right terminal */
-.matrix-animation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,20,0,1) 100%);
-  overflow: hidden;
-}
-
-.matrix-animation::before {
-  content: '01001010111000101101010101110101010001101010100010101010010101';
-  position: absolute;
-  color: #0f0;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 10px;
-  line-height: 12px;
-  letter-spacing: 2px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  word-break: break-all;
-  animation: matrix 20s linear infinite;
-  opacity: 0.7;
-}
-
-@keyframes matrix {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Cyber elements */
-.cyber-elements {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.cyber-circle,
-.cyber-square,
-.cyber-triangle {
-  position: absolute;
-  opacity: 0.05;
-}
-
-.cyber-circle {
-  width: 300px;
-  height: 300px;
-  border: 2px solid var(--orange);
-  border-radius: 50%;
-  top: 10%;
-  left: 5%;
-  animation: float 15s ease-in-out infinite;
-}
-
-.cyber-square {
-  width: 200px;
-  height: 200px;
-  border: 2px solid var(--red);
-  bottom: 15%;
-  right: 8%;
-  transform: rotate(45deg);
-  animation: float 20s ease-in-out infinite reverse;
-}
-
-.cyber-triangle {
-  width: 0;
-  height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-bottom: 260px solid rgba(255, 140, 0, 0.1);
-  bottom: 5%;
-  left: 15%;
-  animation: float 25s ease-in-out infinite 2s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0);
-  }
-  50% {
-    transform: translateY(-30px) rotate(5deg);
-  }
-}
-
 /* Typewriter effect */
 .typewriter {
   text-align: center;
@@ -479,7 +288,7 @@ code {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 69, 0, 0.05) 0%, transparent 70%);
+  background: #000;
   z-index: 0;
   pointer-events: none;
 }
@@ -491,19 +300,12 @@ code {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.05) 0%, transparent 70%);
+  background: #000;
   z-index: 0;
   pointer-events: none;
 }
 
 /* Grid lines in the background */
-.App {
-  background-image: 
-    linear-gradient(to right, rgba(255, 69, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 69, 0, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .card-grid {
@@ -595,7 +397,9 @@ code {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #ff6200;
+  background-color: transparent;
+  color: var(--orange);
+  border: 1px solid var(--orange);
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -607,7 +411,7 @@ code {
 }
 
 .about-me-button:hover {
-  background-color: #e55a00;
+  background-color: rgba(255, 165, 0, 0.1);
 }
 
 .about-me-popup {

@@ -3,6 +3,9 @@ import './App.css';
 import beforeChange from './images/BeforeChange.png';
 import afterChange from './images/AfterChange.png';
 import profilePic from './images/hello.jpg';
+import webAssemblyReqOne from './images/requestsOne.png';
+import webAssemblyResOne from './images/responseOne.png';
+import webAssemblyEncodeOne from './images/base64-picture.png';
 import { FaGithub, FaDiscord } from 'react-icons/fa';
 
 const sampleWriteups = [
@@ -10,7 +13,7 @@ const sampleWriteups = [
     id: 1,
     title: "PicoCTF: 'Power Cookie'",
     platform: "PicoCTF",
-    difficulty: "Medium",
+    difficulty: "Medium (WEB)",
     summary: "Not much of a description but there is hints in the name (Cookie)",
     thumbnail: "/images/power-cookie-thumb.png",
     sections: [
@@ -39,6 +42,46 @@ const sampleWriteups = [
             code: `# Its really simple its just one command:
 curl -b "isAdmin=1" http://saturn.picoctf.net:<your_port>/check.php
 # Now if you look at the http response you will see the flag between the <body> tags`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "PicoCTF: 'Some Assembly Required 1'",
+    platform: "PicoCTF",
+    difficulty: "Medium (WEB)",
+    summary: "Well there is not so much described right here.",
+    thumbnail: "/images/power-cookie-thumb.png",
+    sections: [
+      {
+        title: "Reconnaissance",
+        steps: [
+          {
+            content:
+              "Firstly started with researching what WASM was (Web Assembly) thought it would be alot harder so i started with understanding how that worked (did not understand) then i worked my way back to the website and found decided to look in the console (wich you should always start with). I found some GET requests there.",
+            image: webAssemblyReqOne,
+          },
+          {
+            content: "I thought this looked quite weird and clicked in on the GET request and then response where i found an really long line ",
+            image: webAssemblyResOne,
+          },
+          {
+            content: "Well i looked into this and decided this was weird so i copied the whole parameter and then pasted it and i saw an '=' in the end. Wich i supposed was base64 encoded, I copied the line after the last '/'",
+            image: webAssemblyEncodeOne,
+          },
+          {
+            content: "So i just send an echo command like this:"
+          },
+        ],
+      },
+      {
+        title: "Command:",
+        steps: [
+          {
+            code: `echo "IQcgBiAHcyEIQQEhCSAIIAlxIQogCg8LPwEFfyOAgICAACECQRAhAyACIANrIQQgBCAANgIMIAQgATYCCCAEKAIMIQUgBCgCCCEGIAYgBToAsIiAgAAPCwsyAQBBgAgLK3BpY29DVEZ7YThiYWUxMGY0ZDk1NDQxMTAyMjJjMmQ2MzlkYzZkZTZ9AAA=
+" | base64 --decode`,
           },
         ],
       },
@@ -159,56 +202,6 @@ function App() {
             <div className="card-row">
               {writeups
                 .filter((writeup) => writeup.platform === "Säkerhetssm")
-                .map((writeup) => (
-                  <div key={writeup.id} className="card" onClick={() => handleCardClick(writeup)}>
-                    {writeup.thumbnail && (
-                      <img src={writeup.thumbnail} alt={`${writeup.title} thumbnail`} className="card-thumbnail" />
-                    )}
-                    <h2>{writeup.title}</h2>
-                    <div className="card-badges">
-                      <span className="badge platform">{writeup.platform}</span>
-                      <span className="badge difficulty">{writeup.difficulty}</span>
-                    </div>
-                    <p>{writeup.summary}</p>
-                    <div className="card-footer">
-                      <span className="read-more">Click to read full write-up</span>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-            {/* Divider and cards for HackTheBox */}
-            <div className="ctf-divider">
-              <h2 className="divider-title">HackTheBox</h2>
-            </div>
-            <div className="card-row">
-              {writeups
-                .filter((writeup) => writeup.platform === "HackTheBox")
-                .map((writeup) => (
-                  <div key={writeup.id} className="card" onClick={() => handleCardClick(writeup)}>
-                    {writeup.thumbnail && (
-                      <img src={writeup.thumbnail} alt={`${writeup.title} thumbnail`} className="card-thumbnail" />
-                    )}
-                    <h2>{writeup.title}</h2>
-                    <div className="card-badges">
-                      <span className="badge platform">{writeup.platform}</span>
-                      <span className="badge difficulty">{writeup.difficulty}</span>
-                    </div>
-                    <p>{writeup.summary}</p>
-                    <div className="card-footer">
-                      <span className="read-more">Click to read full write-up</span>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-            {/* Divider and cards for TryHackMe */}
-            <div className="ctf-divider">
-              <h2 className="divider-title">TryHackMe</h2>
-            </div>
-            <div className="card-row">
-              {writeups
-                .filter((writeup) => writeup.platform === "TryHackMe")
                 .map((writeup) => (
                   <div key={writeup.id} className="card" onClick={() => handleCardClick(writeup)}>
                     {writeup.thumbnail && (
